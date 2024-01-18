@@ -2,7 +2,7 @@
 %% THE ELECTRON BAND STRUCTURE OF FCC SEMICONDUCTORS
 %% USING EMPIRICAL PSEUDOPOTENTIALS 
 
-semiconductor='Si'
+semiconductor='CdTe'
 tol=1e-12
 
 
@@ -65,7 +65,7 @@ end
 %       Phys. Rev. vol.141, p.789 (1966)
 
 material_list=['Si';'Ge';'Sn';'GaP';'GaAs';'AlSb';'InP';'GaSb'; ...
-               'InAs';'InSb';'ZnS';'ZnSe';'ZnTe';'CdTe','Empty lattice'];
+               'InAs';'InSb';'ZnS';'ZnSe';'ZnTe';'CdTe';'Empty lattice'];
 
 % NB: In Matlab/Octave, a matrix of strings is unexploitable
 %     => Conversion of matrix of strings into an exploitable
@@ -124,7 +124,20 @@ ff(14,:)= [ 0.00 -0.20 0.00 0.04 0.15 0.09 0.04]; % CdTe
 %  is deduced from the results of a prelimninary run 
 %  with ff(1:m)=0
 
-ff(1,1) = -7.704369581925116E-01 ; % Si
+ff(1,1) = -7.704369581925116E-01;   % Si
+ff(2,1) = -9.490386811 / Rydberg;   % Ge
+ff(3,1) = -6.822728049 / Rydberg;   % Sn
+ff(4,1) = -9.240371831 / Rydberg;   % GaP
+ff(5,1) = -8.899079346 / Rydberg;   % GaAs
+ff(6,1) = -6.979509983 / Rydberg;   % AlSb
+ff(7,1) = -7.676268391 / Rydberg;   % InP
+ff(8,1) = -6.964636224 / Rydberg;   % GaSb
+ff(9,1) = -7.153679011 / Rydberg;   % InAs
+ff(10,1)= -6.073912914 / Rydberg;   % InSb
+ff(11,1)= -6.373349377 / Rydberg;   % ZnS
+ff(12,1)= -6.129080477 / Rydberg;   % ZnSe
+ff(13,1)= -5.347461147 / Rydberg;   % ZnTe
+ff(14,1)= -4.272348183 / Rydberg;   % CdTe
 
 % ff(1:2:14) to be completed
 

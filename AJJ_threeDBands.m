@@ -8,12 +8,15 @@ CohenBergstresser1966
 recipunit=1e+10;
 ekinscale=(hbar*recipunit)^2/(2*elm)/qel;
 %%%%%%%%%%%%% Unit vectors in reciprocal space %%%%%%%%%%%%%%%
+
+% 2pi missing in definition, and, <'* == .*>?
+
 g=zeros(4,3);
 g(1:3,1)=cross(a(:,2),a(:,3))/cell_volume;
 g(1:3,2)=cross(a(:,3),a(:,1))/cell_volume;
 g(1:3,3)=cross(a(:,1),a(:,2))/cell_volume;
 for ii=1:3
-  g(4,ii)=g(1:3,ii)'*g(1:3,ii);
+  g(4,ii)=g(1:3,ii)' * g(1:3,ii);
 end
 %%%%%%%%%Build reciprocal lattice%%%%%%%%%%
 min_norm =sqrt(min(g(4,:)));
@@ -102,7 +105,7 @@ for jj=1:kept
 end
 
 
-shifts=[0,-9.48,-6.815,-9.238,-8.877,-6.978,-7.676,-6.964,-7.153,-6.073,-6.372,-6.128,-5.347,-4.272]; %shifts applied to the band structures so that the valence band is at 0
+%shifts=[0,-9.48,-6.815,-9.238,-8.877,-6.978,-7.676,-6.964,-7.153,-6.073,-6.372,-6.128,-5.347,-4.272]; %shifts applied to the band structures so that the valence band is at 0
 
 
 for iq=1:nq
@@ -112,7 +115,7 @@ for iq=1:nq
     for jj=1:3
       p(jj)=q(jj,iq)-G(jj,ii);
     end
-    H(ii,ii)=ekinunit*(p*p')+cvg(1)+shifts(m); %diagonal + shift
+    H(ii,ii)=ekinunit*(p*p')+cvg(1);  %+shifts(m); %diagonal + shift
   end
   [v,ev]=eig(H);
   E=real(diag(ev));
@@ -124,6 +127,8 @@ for iq=1:nq
 
 end
 
+% Print the last value until 7th decimal
+fprintf('%.9f\n',firstEs(4,27))
 plot(q(5,:),firstEs,'-o','color', 'black','MarkerSize', 1, 'linewidth', 0.5,q(5,:),separ,'color','red');
 ylabel('E(eV)','FontSize',18);
 xlim([0,q(5,nq)]);
