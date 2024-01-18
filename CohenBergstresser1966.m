@@ -139,8 +139,6 @@ ff(12,1)= -6.129080477 / Rydberg;   % ZnSe
 ff(13,1)= -5.347461147 / Rydberg;   % ZnTe
 ff(14,1)= -4.272348183 / Rydberg;   % CdTe
 
-% ff(1:2:14) to be completed
-
 %% WORK FUNCTIONS [eV]
 % Data from various references
 % Uncertainty may be large (0.1 to 1 eV)
