@@ -2,7 +2,7 @@
 %% THE ELECTRON BAND STRUCTURE OF FCC SEMICONDUCTORS
 %% USING EMPIRICAL PSEUDOPOTENTIALS 
 
-semiconductor='CdTe'
+%semiconductor='Si';     % Chosen in the main file
 tol=1e-12
 
 
