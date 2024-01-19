@@ -16,7 +16,7 @@ dispersion_relation=true;
 compute_dos=false;
 % Materials: 1'Si';2'Ge';3'Sn';4'GaP';5'GaAs';6'AlSb';7'InP';8'GaSb';
 % 9'InAs';10'InSb';11'ZnS';12'ZnSe';13'ZnTe';14'CdTe';15'Empty lattice'
-semiconductor='CdTe'    % Choose the semiconductor (SC)
+semiconductor='Sn'     % Choose the semiconductor (SC)
 CohenBergstresser1966   % Load the parameters of the pseudopotential for SC
 spacing=ls(m);          % Spacing in the reciprocal space for SC
 ekinunit=ekinscale * (2*pi / spacing)^2; % Energy unit for SC
@@ -123,6 +123,11 @@ if(dispersion_relation)
       fprintf(fid,'%f %f\n',qpath(5,ii),Eband(jj,ii));
     end
     fprintf(fid,'\n');
+  end
+  fprintf(fid, '%f ', tix); % Write tix
+  fprintf(fid, '\n');
+  for ii = 1:length(til)
+    fprintf(fid, '%s\n', til{ii}); % Write each element of til on a new line
   end
   fclose(fid);
 end
