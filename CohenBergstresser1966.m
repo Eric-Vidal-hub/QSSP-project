@@ -124,7 +124,7 @@ ff(14,:)= [ 0.00 -0.20 0.00 0.04 0.15 0.09 0.04]; % CdTe
 %  is deduced from the results of a prelimninary run 
 %  with ff(1:m)=0
 
-ff(1,1) = -7.704369581925116E-01;   % Si
+ff(1,1) = -10.588391537 / Rydberg;  % Si
 ff(2,1) = -9.490386811 / Rydberg;   % Ge
 ff(3,1) = -6.822728049 / Rydberg;   % Sn
 ff(4,1) = -9.240371831 / Rydberg;   % GaP

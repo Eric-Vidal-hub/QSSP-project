@@ -12,11 +12,11 @@ ekinscale = ((hbar * recipunit)^2 / (2.0 * elm)) / qel;
 
 %% COMPUTING THE ELECTRON BAND STRUCTURE OF FCC SEMICONDUCTORS
 %% USING EMPIRICAL PSEUDOPOTENTIALS
-dispersion_relation=true;
-compute_dos=false;
 % Materials: 1'Si';2'Ge';3'Sn';4'GaP';5'GaAs';6'AlSb';7'InP';8'GaSb';
 % 9'InAs';10'InSb';11'ZnS';12'ZnSe';13'ZnTe';14'CdTe';15'Empty lattice'
-semiconductor='Sn'     % Choose the semiconductor (SC)
+semiconductor='CdTe'     % Choose the semiconductor (SC)
+dispersion_relation=true;
+compute_dos=false;
 CohenBergstresser1966   % Load the parameters of the pseudopotential for SC
 spacing=ls(m);          % Spacing in the reciprocal space for SC
 ekinunit=ekinscale * (2*pi / spacing)^2; % Energy unit for SC
@@ -110,14 +110,15 @@ for qq=1:nqpath
   eigenvals=diag(D);  % Extract eigenvalues
   Eband(:,qq)=eigenvals(1:nband);
 end
-% Print the max value for the VB (sometimes band 4/5)
+
+%% PRINT THE MAX (at 27) VAL FOR THE VB (4)
 fprintf('\nVB maximum %.9f\n\n',Eband(4,27))
 
 %% WRITE THE BAND STRUCTURE IN A FILE
 filename=strcat(int2str(m), 'bandstructure.dat');
 if(dispersion_relation)
   fid=fopen(filename,'w');
-  fprintf(fid,'%d %d\n',nqpath,nband); % Write nqpath and nband at the beginning of the file
+  fprintf(fid,'%d %d\n',nqpath,nband); % Write nqpath and nband
   for ii=1:nqpath
     for jj=1:nband
       fprintf(fid,'%f %f\n',qpath(5,ii),Eband(jj,ii));
@@ -127,7 +128,7 @@ if(dispersion_relation)
   fprintf(fid, '%f ', tix); % Write tix
   fprintf(fid, '\n');
   for ii = 1:length(til)
-    fprintf(fid, '%s\n', til{ii}); % Write each element of til on a new line
+    fprintf(fid, '%s\n', til{ii}); % Write til
   end
   fclose(fid);
 end

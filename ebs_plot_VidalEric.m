@@ -4,13 +4,13 @@ clear all;       % Clear all variables/functions in memory
 clc;             % Clear screen in the command window
 
 %% DEFINE THE BAND STRUCTURE PLOT PARAMETERS
-semiconductor='Ge';   % Choose the semiconductor
-bs_step=4;              % Choose the step for the Band Structure plot
+semiconductor='CdTe'  % Choose the semiconductor
+bs_step=7;          % Choose the step for the BS scattering plot
 
 %% READ THE BAND STRUCTURE FROM A FILE
 materials = {'Si','Ge','Sn','GaP','GaAs','AlSb','InP','GaSb', ...
 'InAs','InSb','ZnS','ZnSe','ZnTe','CdTe','Empty lattice'};
-m = find(strcmp(materials,semiconductor))
+m = find(strcmp(materials,semiconductor));
 filename = strcat(int2str(m),'bandstructure.dat');
 fid=fopen(filename,'r');
 nqpath=fscanf(fid,'%d',1);  % Read nqpath from the file
@@ -40,16 +40,24 @@ end
 fclose(fid);
 
 %% PLOT THE BAND STRUCTURE
-ylimits = [[-5.5,6]; [-5,7]; [-4,6]; [-4,7]; [-4,7]; [-4,7]; [-4,7];...
-[-3,6.4]; [-4,7]; [-3,6]; [-3,10]; [-3,9]; [-3,8.5]; [-3.5,8]];
-
-plot(qpath(5,1:bs_step:end),Eband(:,1:bs_step:end),'-o','color',...
-'black','MarkerSize', 2, 'linewidth', 0.5, 'MarkerFaceColor', 'white');
-ylabel('E   (eV)','FontSize',18);
+title_pos = [[1.3,5]; [1.3,5]; [1.3,5]; [1.3,5]; [1.3,5]; [1.3,5]; [1.3,5];...
+[1.3,5]; [1.3,5]; [1.3,5]; [1.3,8]; [1.3,8]; [1.4,7]; [1.4,6]];
+ylimits = [[-6,7]; [-5,7]; [-4,6]; [-4,7]; [-4,7]; [-4,7]; [-4,7];...
+[-3,6.4]; [-4,7]; [-3,6]; [-3,10]; [-3,9]; [-3,9]; [-4,8]];
+figure;
+hold on;
+plot(qpath(5,:),Eband,'-','color',...
+'black','linewidth', 1.3);
+plot(qpath(5,1:bs_step:end),Eband(:,1:bs_step:end),'o','color',...
+'black','MarkerSize', 5, 'linewidth', 1.3, 'MarkerFaceColor', 'white');
+hold off
+title(materials{m},'fontsize', 26,'position', title_pos(m,:));
+ylabel('E   (eV)','FontSize',24);
 xlim([0,qpath(5,nqpath)]);
 ylim(ylimits(m,:));
-title (materials{m}, "fontsize", 20);
+set(gca,'xtick',tix);
+set(gca,'xticklabel',til,'FontSize',24);
 set(gca, 'ytick', ylimits(m,1):1:ylimits(m,2));
-
-set (gca,'xtick',tix);
-set (gca,'xticklabel',til,'FontSize',18,'FontWeight','bold');
+set(gca,'TickLength',[0.03, 0.02]);
+set(gca, 'Box', 'on');
+set(gca, 'linewidth', 1);
