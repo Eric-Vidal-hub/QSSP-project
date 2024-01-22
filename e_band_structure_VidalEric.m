@@ -104,7 +104,7 @@ for qq=1:nqpath
     for jj=1:3  % qpath: Cartesian coordinates of wavevector i
       p(jj)=qpath(jj,qq)-G(jj,ii);
     end
-    Ham(ii,ii)=ekinunit*dot(p,p)+V_G(1);  % Diagonal
+    Ham(ii,ii)=ekinunit*dot(p,p)+V_G(1);  % Diagonal EKin+VG
   end
   [~,D]=eig(Ham);     % Diagonalization
   eigenvals=diag(D);  % Extract eigenvalues
