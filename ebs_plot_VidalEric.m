@@ -5,7 +5,7 @@ clc;             % Clear screen in the command window
 
 %% DEFINE THE BAND STRUCTURE PLOT PARAMETERS
 semiconductor='CdTe'  % Choose the semiconductor
-bs_step=7;          % Choose the step for the BS scattering plot
+bs_step=7;            % Choose the step for the BS scattering plot
 
 %% READ THE BAND STRUCTURE FROM A FILE
 materials = {'Si','Ge','Sn','GaP','GaAs','AlSb','InP','GaSb', ...
@@ -24,7 +24,7 @@ for ii=1:nqpath
   fscanf(fid,'%c',1);
 end
 tix = fscanf(fid, '%f', [1, inf]); % Read tix
-til = {}; % Initialize til as an empty cell array
+til = {};           % Initialize til as an empty cell array
 line = fgetl(fid);  % Read the first line
 index = 1;          % Initialize index
 while ischar(line)  % Continue until fgetl returns -1
@@ -47,9 +47,10 @@ ylimits = [[-6,7]; [-5,7]; [-4,6]; [-4,7]; [-4,7]; [-4,7]; [-4,7];...
 figure;
 hold on;
 plot(qpath(5,:),Eband,'-','color',...
-'black','linewidth', 1.3);
+'black','linewidth', 1.3);  % Plot the band structure with a line
 plot(qpath(5,1:bs_step:end),Eband(:,1:bs_step:end),'o','color',...
 'black','MarkerSize', 5, 'linewidth', 1.3, 'MarkerFaceColor', 'white');
+% Plot the band structure with circles and step 'bs_step'
 hold off
 title(materials{m},'fontsize', 26,'position', title_pos(m,:));
 ylabel('E   (eV)','FontSize',24);
@@ -57,7 +58,7 @@ xlim([0,qpath(5,nqpath)]);
 ylim(ylimits(m,:));
 set(gca,'xtick',tix);
 set(gca,'xticklabel',til,'FontSize',24);
-set(gca, 'ytick', ylimits(m,1):1:ylimits(m,2));
+set(gca,'ytick',ylimits(m,1):1:ylimits(m,2));
 set(gca,'TickLength',[0.03, 0.02]);
-set(gca, 'Box', 'on');
-set(gca, 'linewidth', 1);
+set(gca,'Box','on');
+set(gca,'linewidth',1);

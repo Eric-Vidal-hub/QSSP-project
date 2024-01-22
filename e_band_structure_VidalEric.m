@@ -111,8 +111,9 @@ for qq=1:nqpath
   Eband(:,qq)=eigenvals(1:nband);
 end
 
-%% PRINT THE MAX (at 27) VAL FOR THE VB (4)
+%% PRINT THE MAX VALUE at GAMMA (X=27) FOR THE VB (BAND=4)
 fprintf('\nVB maximum %.9f\n\n',Eband(4,27))
+% This is for setting the V_{G=0} analysis
 
 %% WRITE THE BAND STRUCTURE IN A FILE
 filename=strcat(int2str(m), 'bandstructure.dat');
