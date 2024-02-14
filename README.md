@@ -1,2 +1,3 @@
 # QSSP-project
-Electron band structure of 14 semiconductors
+
+Compute the electron band structure of 14 face-centered cubic (FFC) semiconductors.
